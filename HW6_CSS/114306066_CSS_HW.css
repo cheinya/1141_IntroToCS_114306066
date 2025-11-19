@@ -1,0 +1,136 @@
+body{
+	
+	background-color: #eeede1;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	padding: 20px;
+ 	
+}
+
+.main-container{
+	width: 1000px;
+	border-radius: 10px;
+	display: flex;
+	background-color: white;
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+
+}
+
+.left-panel{
+	width: 30%;
+	background-color: #f3f3f3;
+}
+
+
+.photo-panel img {
+    width: 100%;
+}
+
+.text-content{
+	padding: 20px;
+
+}
+
+.right-panel{
+	width: 70%;
+	background-color: white;
+}
+
+.section{
+	padding: 20px;
+	margin-bottom: ˇpx;
+}
+
+.section-title{
+	margin-bottom: 20px;
+}
+
+.timeline{
+	display: flex;
+	
+	margin-bottom: 5px;
+}
+
+.year{
+	width: 150px;
+    font-weight: bold;
+
+}
+
+.description{
+	flex: 1;
+
+}
+
+.tag{
+	display: inline-block;
+	padding: 5px 12px;
+	background-color: lightblue;
+	color: brown;
+	border-radius: 10px;
+	margin-right: 10px;
+    margin-bottom: 10px;
+
+}
+
+
+.hwlabcontainer{
+	display: flex;
+}
+.hw-column{
+	background-color: lightblue;
+	border-radius: 10px;
+	padding: 10px;
+	flex: 1;
+	
+
+}
+.hw-column a{
+	text-decoration: none;
+
+}
+
+.hw-column a:hover{
+	font-weight: bold;
+	color: blue;
+}
+
+.lab-column{
+	background-color: lightblue;
+	border-radius: 10px;
+	padding: 10px;
+	flex: 1;
+
+}
+
+.lab-column a{
+	text-decoration: none;
+}
+
+.lab-column a:hover{
+	font-weight: bold;
+	color: blue;
+}
+
+.music{
+	display: flex;
+    gap: 10px;
+}                     
+
+.music-item{
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	width: 140px; 
+}
+
+.music img{
+	margin-bottom: 3px;
+	margin-right: 0;
+	border-radius: 8px;
+}
+.music-note{
+	color: gray;
+
+}
