@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<h1>114306066_HW6_1A2B</h1>
+	<p>Enter 4 unique numbers</p>
+	<input id="userInput" type="text" maxlength="4">
+	<button onclick="play()">Guess</button>
+
+	<div id="recordBox"></div>
+
+	<script>
+		function generateAnswer() {
+    let digits = ["0","1","2","3","4","5","6","7","8","9"];
+    let ans = [];
+
+    while (ans.length < 4) {
+        let idx = Math.floor(Math.random() * digits.length);
+        ans.push(digits[idx]);
+        digits.splice(idx, 1);  // 移除選過的數字（避免重複）
+    }
+    return ans.join("");
+}
+
+let answer = generateAnswer();
+let count = 0;
+
+
+// ------------------ 檢查輸入是否合法 ------------------
+function isValid(str) {
+    if (str.length !== 4) return false;
+    if (!/^\d{4}$/.test(str)) return false; // 必須都是數字
+
+    // 檢查是否有重複
+    let set = new Set(str.split(""));
+    return set.size === 4;
+}
+
+// ------------------ 計算 A / B ------------------
+function checkAB(guess, ans) {
+    let A = 0, B = 0;
+
+    for (let i = 0; i < 4; i++) {
+        if (guess[i] === ans[i]) {
+            A++;
+        } else if (ans.includes(guess[i])) {
+            B++;
+        }
+    }
+    return `${A}A${B}B`;
+}
+
+// ------------------ 主遊戲流程 ------------------
+function play() {
+    let inputField = document.getElementById("userInput");
+    let guess = inputField.value.trim();
+    
+    if (!isValid(guess)) {
+        alert("輸入錯誤！請輸入 4 位不重複的數字。");
+        return;
+    }
+
+    count++;
+    let result = checkAB(guess, answer);
+
+    // 記錄顯示
+    let box = document.getElementById("recordBox");
+    let line = document.createElement("div");
+    line.className = "line";
+    line.textContent = `第${count}次: ${guess} → ${result}`;
+    box.appendChild(line);
+
+    // 猜對！
+    if (result === "4A0B") {
+        alert(`你猜對了！總共猜了 ${count} 次。`);
+    }
+
+    inputField.value = "";
+}
+
+
+	</script>
+
+</body>
+</html>
