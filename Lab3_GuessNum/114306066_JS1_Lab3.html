@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+	<h1>114306066_Number Guessing Game</h1>
+	<script>
+		var answer = Math.floor(Math.random() * 100 + 1);
+		var chances = 7;
+		var min = 1;
+    var max = 100;
+        
+		while(chances > 0){
+		var input = window.prompt("請輸入 1 到 100 之間的整數。\n你還有 "+chances+" 次機會。");
+
+		input = input.trim();
+        var guess = Number(input);
+
+          if (input === "" || isNaN(input)) {
+            alert('輸入錯誤：請輸入數字。');
+            continue;
+            }
+          if (guess < 1 || guess > 100) {
+            alert('請輸入有效範圍內的數字(不能超出1到100)');
+            continue; 
+          }
+
+          if(guess < answer){
+          	if(guess > min){
+          	chances--;
+          	alert('不對!數字介在 '+guess+' 到 '+max+' 間。你還有'+chances+'次機會。');
+          	min = guess;
+          }else{
+          	chances--;
+          	alert('不對!數字介在 '+min+' 到 '+max+' 間。你還有'+chances+'次機會。');
+          }
+
+          }else if(guess > answer){
+          	if(guess < max){
+          	chances--
+          	alert('不對!數字介在 '+min+' 到 '+guess+' 間。你還有'+chances+'次機會。')
+          	max = guess;
+          }else{
+          	chances--
+          	alert('不對!數字介在 '+min+' 到 '+max+' 間。你還有'+chances+'次機會。')   
+          }
+          }else{
+          	alert('恭喜你答對了!正確答案是 '+guess);
+          	document.body.innerHTML += '<img src = "images/correct.jpg">';
+ 			break;
+          }
+
+          if(chances === 0){
+          	alert('機會已用光囉~正確答案是'+answer);
+          	document.body.innerHTML += '<img src = "images/wrong.jpg">';
+          }
+
+	}
+	
+
+</script>
+</body>
+</html>
