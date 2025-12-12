@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS2 Lab4 - Grade Statistics</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Grade Statistics</h1>
+    </header>
+
+    <div class="input-container">
+        
+        <label for="mathGrade">Math</label>
+        <input type="number" id="mathGrade" min="0" max="100" required>
+        
+        <label for="englishGrade">English</label>
+        <input type="number" id="englishGrade" min="0" max="100" required>
+        
+        <button id="submitBtn">Submit</button>
+    </div>
+
+    <div class="table-container">
+        <h2>成績列表</h2>
+        <table id="gradeTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Math</th>
+                    <th>English</th>
+                    <th>Average</th>
+                </tr>
+            </thead>
+            <tbody id="gradeTableBody">
+                </tbody>
+            <tfoot>
+                <tr>
+                    <td>Average</td>
+                    <td id="mathAverage">0.00</td>
+                    <td id="englishAverage">0.00</td>
+                    <td id="overallAverage">0.00</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
