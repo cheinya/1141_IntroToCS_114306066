@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 客家故事互動繪本 - 三隻小豬</title>
+    <title>AI 客家故事互動繪本 - 魚藤坪與龍騰斷橋 (最終修正版)</title>
     <style>
-        /* ================================================= */
-        /* CSS 樣式 */
-        /* ================================================= */
-
+        /* CSS 樣式省略，維持前一版本 */
         body {
-            background-color: #E0FFFF; /* 淺藍色背景 (Aqua Marine) */
+            background-color: #E0FFFF;
             font-family: '微軟正黑體', 'Microsoft JhengHei', Arial, sans-serif;
             margin: 0;
             padding: 20px;
-            text-align: center; /* 讓所有內容預設置中 */
+            text-align: center;
         }
 
         .container {
             max-width: 800px;
-            margin: 0 auto; /* 整個內容區塊置中 */
+            margin: 0 auto;
             background-color: #FFFFFF;
             padding: 20px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* 標題樣式 */
         h1 {
             color: #0056b3;
             border-bottom: 3px solid #E0FFFF;
@@ -34,7 +30,6 @@
             margin-bottom: 30px;
         }
 
-        /* 繪本圖片樣式 */
         .image-container img {
             max-width: 100%;
             height: auto;
@@ -43,34 +38,30 @@
             margin-bottom: 25px;
         }
 
-        /* 字幕區塊樣式 */
         .caption {
             font-size: 1.5em;
             line-height: 1.8;
-            min-height: 50px; /* 確保沒有字幕時版面不跳動 */
+            min-height: 50px;
         }
 
-        /* 紅色關鍵字（可點擊詞彙）樣式 */
         .hakkaword {
-            color: #CC0000; /* 紅色顯示 */
+            color: #CC0000;
             font-weight: bold;
-            cursor: pointer; /* 顯示手形游標 */
+            cursor: pointer;
             padding: 2px 0;
-            border-bottom: 2px dashed #CC0000; /* 視覺提示 */
+            border-bottom: 2px dashed #CC0000;
             transition: color 0.2s;
         }
 
         .hakkaword:hover {
-            color: #FF6347; /* 滑鼠經過變色 */
+            color: #FF6347;
         }
         
-        /* 頁碼提示 */
         .page-indicator {
             margin-top: 30px;
             font-size: 1.1em;
             color: #666;
         }
-        
     </style>
 </head>
 <body>
@@ -79,18 +70,15 @@
     <h1>客家故事：AI 數位繪本 - 魚藤坪與龍騰斷橋</h1>
 
     <div class="image-container">
-        <img id="bookImage" src="" alt="繪本插畫" />
+        <img id="bookImage" src="images/image1.png" alt="繪本插畫" onerror="this.src='images/placeholder.png';" />
     </div>
 
     <div id="captionText" class="caption">
-        請按空白鍵開始
-    </div>
+        </div>
     
     <div class="page-indicator">
-        <span id="pageNumber">0</span> / 8頁 | 按 **[空白鍵]** 換下一頁
+        <span id="pageNumber">1</span> / 8頁 | 按 **[空白鍵]** 換下一頁
     </div>
-
-    <audio id="fullAudioPlayer" src="audio/full_hakkastory_three_pigs.mp3" preload="auto"></audio>
 
 </div>
 
@@ -99,144 +87,101 @@
     // JavaScript 邏輯
     // =================================================
 
-    // 1. 繪本數據（請根據您的 AI 整理結果填入）
     const bookData = [
         // 頁面 01
-        {
-            image: 'images/image1.png', // 請自行替換為您的圖片路徑
-            caption: '<span id="w01" data-start="1.500" data-end="2.100" class="hakkaword">先民</span>來到魚藤坪開墾，定居落來。',
-        },
+        { image: 'images/image1.png', caption: '<span id="w01" data-word-id="1" class="hakkaword">先民</span>來到魚藤坪開墾，定居落來。', },
         // 頁面 02
-        {
-            image: 'images/image2.png',
-            caption: '<span id="w02" data-start="4.800" data-end="5.350" class="hakkaword">鯉魚潭</span>肚个鯉魚精，時常出來食掉村民个頭牲。',
-        },
+        { image: 'images/image2.png', caption: '<span id="w02" data-word-id="2" class="hakkaword">鯉魚潭</span>肚个鯉魚精，時常出來食掉村民个頭牲。', },
         // 頁面 03
-        {
-            image: 'images/image3.png',
-            caption: '<span id="w03" data-start="3.500" data-end="4.250" class="hakkaword">地理先生</span>來指點，用魚藤、關刀趕走鯉魚精。',
-        },
+        { image: 'images/image3.png', caption: '<span id="w03" data-word-id="3" class="hakkaword">地理先生</span>來指點，用魚藤、關刀趕走鯉魚精。', },
         // 頁面 04
-        {
-            image: 'images/image4.png',
-            caption: '橋身用紅磚砌成，看起來有<span id="w04" data-start="5.500" data-end="6.350" class="hakkaword">歐洲風情</span>。',
-        },
+        { image: 'images/image4.png', caption: '橋身用紅磚砌成，看起來有<span id="w04" data-word-id="4" class="hakkaword">歐洲風情</span>。', },
         // 頁面 05
-        {
-            image: 'images/image5.png',
-            caption: '後來關刀山<span id="w05" data-start="7.500" data-end="8.250" class="hakkaword">大地動</span>，橋面全壞了。',
-        },
+        { image: 'images/image5.png', caption: '後來關刀山<span id="w05" data-word-id="5" class="hakkaword">大地動</span>，橋面全壞了。', },
         // 頁面 06
-        {
-            image: 'images/image6.png',
-            caption: '<span id="w06" data-start="9.500" data-end="10.250" class="hakkaword">勝利車站</span>用福州站建材，係用鑿榫設計个。',
-        },
+        { image: 'images/image6.png', caption: '<span id="w06" data-word-id="6" class="hakkaword">勝利車站</span>用福州站建材，係用鑿榫設計个。', },
         // 頁面 07
-        {
-            image: 'images/image7.png',
-            caption: '屋頂還有<span id="w07" data-start="11.500" data-end="11.850" class="hakkaword">烏鴉</span>，聽說是保平安个法器。',
-        },
+        { image: 'images/image7.png', caption: '屋頂還有<span id="w07" data-word-id="7" class="hakkaword">烏鴉</span>，聽說是保平安个法器。', },
         // 頁面 08
-        {
-            image: 'images/image8.png',
-            caption: '老車頭經過大地動，還係<span id="w08" data-start="13.000" data-end="13.900" class="hakkaword">完好無損</span>呢',
-        },
-        
+        { image: 'images/image8.png', caption: '老車頭經過大地動，還係<span id="w08" data-word-id="8" class="hakkaword">完好無損</span>呢', },
     ];
 
-    let currentPage = -1; // -1 表示尚未開始
+    let currentPage = 0; // 索引從 0 開始，代表第一頁
     const totalPages = bookData.length;
-
-    // 元素參照
     const bookImage = document.getElementById('bookImage');
     const captionText = document.getElementById('captionText');
     const pageNumberDisplay = document.getElementById('pageNumber');
-    const fullAudioPlayer = document.getElementById('fullAudioPlayer');
     
-    let stopAudioTimer = null; // 用於儲存setTimeout的計時器ID
+    let keywordAudio = new Audio();
+    // 設置錯誤處理：這是診斷音檔問題的關鍵
+    keywordAudio.onerror = (e) => console.error("音檔載入失敗！請確認檔案路徑/格式:", keywordAudio.src, e);
 
-    // --- 核心函數：載入頁面內容 ---
+
     function loadPage(pageIndex) {
+        if (keywordAudio) {
+            keywordAudio.pause();
+            keywordAudio.currentTime = 0;
+        }
+
         if (pageIndex >= 0 && pageIndex < totalPages) {
             const data = bookData[pageIndex];
             
-            // 載入圖片和字幕
-            bookImage.src = data.image;
+            // 嘗試載入圖片
+            bookImage.src = data.image; 
+            
             captionText.innerHTML = data.caption;
             pageNumberDisplay.textContent = pageIndex + 1;
-
-            // 重新繫結關鍵詞的點擊事件
             bindKeywordEvents();
         } else if (pageIndex === totalPages) {
-            // 故事結束
-            
+            // 故事結束頁
             captionText.innerHTML = '✨ 故事結束！感謝聆聽。 ✨';
             pageNumberDisplay.textContent = totalPages;
-        } else {
-             // 初始頁面設定
             
-             captionText.innerHTML = '請按 **[空白鍵]** 開始閱讀客家故事';
-             pageNumberDisplay.textContent = '0';
         }
         currentPage = pageIndex;
     }
     
-    // --- 核心函數：點擊關鍵詞播放音訊片段 ---
     function playAudioFragment(event) {
-        // 確保點擊的目標是關鍵詞
         const keywordElement = event.target.closest('.hakkaword');
         if (!keywordElement) return;
 
-        // 清除上一個片段可能還在運行的定時器
-        if (stopAudioTimer) {
-            clearTimeout(stopAudioTimer);
+        if (keywordAudio) {
+             keywordAudio.pause();
+             keywordAudio.currentTime = 0;
         }
 
-        // 獲取時間戳記數據
-        const startTime = parseFloat(keywordElement.dataset.start);
-        const endTime = parseFloat(keywordElement.dataset.end);
+        const wordId = keywordElement.dataset.wordId; 
+        if (!wordId) return;
+
         
-        if (isNaN(startTime) || isNaN(endTime)) return;
+        const audioPath = `recordings/${wordId}.MP3`; 
 
-        const duration = (endTime - startTime) * 1000; // 計算播放時間（毫秒）
-
-        // 設定播放起始點
-        fullAudioPlayer.currentTime = startTime;
-
-        // 開始播放
-        fullAudioPlayer.play();
-
-        // 設定定時器，在結束時間自動暫停
-        stopAudioTimer = setTimeout(() => {
-            fullAudioPlayer.pause();
-        }, duration);
+        keywordAudio.src = audioPath;
+        keywordAudio.play().catch(error => {
+             console.error(`無法播放單字音檔 (${audioPath})，請檢查檔案:`, error);
+        });
     }
     
-    // --- 事件繫結：將點擊事件綁定到所有紅色關鍵詞 ---
     function bindKeywordEvents() {
         const keywords = document.querySelectorAll('.hakkaword');
         keywords.forEach(word => {
-            word.removeEventListener('click', playAudioFragment); // 先移除避免重複綁定
+            word.removeEventListener('click', playAudioFragment); 
             word.addEventListener('click', playAudioFragment);
         });
     }
 
-    // --- 事件繫結：監聽鍵盤空白鍵 ---
     document.addEventListener('keydown', (event) => {
-        // 檢查是否是空白鍵 (Spacebar)
         if (event.code === 'Space' || event.key === ' ') {
-            event.preventDefault(); // 阻止瀏覽器預設的捲動行為
+            event.preventDefault(); 
             
-            // 跳轉到下一頁
             if (currentPage < totalPages) {
                 loadPage(currentPage + 1);
             }
         }
     });
 
-    // --- 啟動時載入封面 ---
-    loadPage(-1); 
-
+    // --- 啟動時直接載入第一頁 (索引 0) ---
+    loadPage(0); 
 </script>
 
 </body>
