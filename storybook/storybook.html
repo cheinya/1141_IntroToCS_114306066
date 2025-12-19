@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>目目的土壤奇遇記</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: '微軟正黑體', 'Microsoft JhengHei', sans-serif;
+            overflow: hidden; /* 防止滾動條 */
+        }
+        .story-container {
+            width: 80%; /* 調整容器寬度 */
+            max-width: 900px; /* 最大寬度 */
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .page {
+            display: none;
+            width: 100%;
+            text-align: center;
+            animation: fadein 0.8s;
+        }
+        .page.active {
+            display: block;
+        }
+        .page img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .caption {
+            font-size: 1.3em; /* 調整字幕大小 */
+            line-height: 1.6;
+            color: #333;
+            text-align: left; /* 字幕靠左對齊 */
+            width: 90%; /* 字幕寬度 */
+            margin: 0 auto;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 768px) {
+            .story-container {
+                width: 95%;
+                padding: 15px;
+            }
+            .caption {
+                font-size: 1.1em;
+            }
+        }
+        @media (max-width: 480px) {
+            .story-container {
+                width: 100%;
+                padding: 10px;
+                border-radius: 0;
+            }
+            .caption {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="story-container">
+        <div class="page active">
+            <img src="images/1.png" alt="台南虱目魚目目">
+            <p class="caption">在台南的某個小村莊裡，住著一隻名叫「目目」的虱目魚。牠從小住在鹹鹹的水塘裡，天天曬太陽、吹海風，生活超級chill～</p>
+        </div>
+        <div class="page">
+            <img src="images/2.png" alt="陸地的秘密">
+            <p class="caption">有一天，目目聽說陸地上的「文旦村」和「高麗菜鎮」的居民都超厲害，他們的植物長得又快又漂亮，因爲他們的家底下，是「砂質土壤」！</p>
+        </div>
+        <div class="page">
+            <img src="images/3.png" alt="泥土地王國的困境">
+            <p class="caption">目目先跳進泥土地裡。結果——才三秒！牠整個黏住，動也動不了😵‍💫「太濕、太悶，我快窒息了啦！」泥土地王國雖然保水，但空氣不流通，根和魚都喘不過氣。</p>
+        </div>
+        <div class="page">
+            <img src="images/4.png" alt="砂質土壤樂園的驚喜">
+            <p class="caption">接著目目來到文旦樹下的砂質土壤。水「咻」一下就滲下去，空氣也能進得來～文旦、柚子和高麗菜的根都伸得超開心。目目感動地說：「原來排水這麼重要！難怪你們長得那麼漂亮～」</p>
+        </div>
+        <div class="page">
+            <img src="images/5.png" alt="目目的結論">
+            <p class="caption">他發現，砂質土壤就像魚池裡的「活水」：水流得動，根才活得好；魚才能呼吸、植物才會甜！最後，目目的結論：「我雖然是虱目魚，但我懂了——土壤也要像我們的水一樣，會呼吸、有流動，才能養出最好吃的文旦、高麗菜，還有快樂的魚！」</p>
+        </div>
+    </div>
+
+    <script>
+        const pages = document.querySelectorAll('.page');
+        let currentPageIndex = 0;
+
+        function showPage(index) {
+            pages.forEach((page, i) => {
+                page.classList.remove('active');
+                if (i === index) {
+                    page.classList.add('active');
+                }
+            });
+        }
+
+        function nextPage() {
+            if (currentPageIndex < pages.length - 1) {
+                currentPageIndex++;
+                showPage(currentPageIndex);
+            } else {
+                // 如果是最後一頁，可以選擇回到第一頁，或顯示結束訊息
+                // currentPageIndex = 0; // 回到第一頁
+                // showPage(currentPageIndex);
+                alert('故事結束了！感謝您的閱讀。');
+            }
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space') { // 按下空白鍵
+                nextPage();
+            }
+        });
+
+        // 初始化顯示第一頁
+        showPage(currentPageIndex);
+    </script>
+</body>
+</html>
